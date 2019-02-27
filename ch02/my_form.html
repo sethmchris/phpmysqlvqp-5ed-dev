@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Simple HTML Form</title>
+	<style type="text/css">
+	label {
+		font-weight: bold;
+		color: #300ACC;
+	}
+	</style>
+</head>
+<body>
+<!-- Script 2.1 - form.html -->
+
+<form action="pursue.php" method="post">
+
+	<fieldset><legend>Enter your information in the form below:</legend>
+
+	<p><label>Student Name: <input type="text" name="student-name" size="20" maxlength="40"></label></p>
+	<p><label>Instructor Name: 
+		<select name="instructor-name">
+			<option value="">--</option>
+			<option value="john">John</option>
+			<option value="juan">Juan</option>
+			<option value="don">Don</option>
+			<option value="james">James</option>
+		</select>
+		</label></p>
+	<p><label>Date: <input type="date" name="date"></label></p>
+
+<!--	<p><label for="gender">Gender: </label><input type="radio" name="gender" value="M"> Male <input type="radio" name="gender" value="F"> Female</p>-->
+
+<!--
+	<p><label>Age:
+	<select name="age">
+		<option value="0-29">Under 30</option>
+		<option value="30-60">Between 30 and 60</option>
+		<option value="60+">Over 60</option>
+	</select></label></p>
+-->
+
+	<p><label>Comments: <textarea name="comments" rows="3" cols="40"></textarea></label></p>
+
+	</fieldset>
+
+	<p align="center"><input type="submit" name="submit" value="Submit My Information"></p>
+
+</form>
+
+</body>
+</html>

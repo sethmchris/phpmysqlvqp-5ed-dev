@@ -6,37 +6,26 @@
 </head>
 <body>
 <?php 
-# Script 2.2 - handle_form.php
-# Script 2.3 - handle_form.php #2
+# Create a new form that takes some input from the user (perhaps base it on a form you know you’ll need for one of your projects). Then create the PHP script that validates the form data and reports upon the results. (Modified version of Script 2.4)
 
 // Create a shorthand for the form data:
-  $name = $_REQUEST['name'];
-  $email = $_REQUEST['email'];
+  $studentName = $_REQUEST['student-name'];
+	$instructorName = $_REQUEST['instructor-name'];
+  $date = $_REQUEST['date'];
   $comments = $_REQUEST['comments'];
-  /* Not used:
-$_REQUEST['age']
-$_REQUEST['gender']
-$_REQUEST['submit']
-*/
 
-// Create the $gender variable:
-if (isset($_REQUEST['gender'])) {
-  $gender = $_REQUEST['gender'];
-} else {
-  $gender = NULL;
-}
+// Create the $instructorName variable:
+	if (isset($_REQUEST['instructor-name'])) {
+		$instructorName = $_REQUEST['instructor-name'];
+	} else {
+		$instructorName = NULL;
+	}
 
 // Print the submitted information:
-  echo "<p>Thank you, <strong> $name</strong>, for the following comments:</p><pre>$comments</pre><p>We will reply to you at<em>$email</em>.</p>\n";
+  echo "<p>Thank you for the comments regarding the following student:<strong> $studentName</strong></p><pre>$comments</pre> <p>Submission date:<em>$date</em></p>\n";
 
-  // Print a message based upon the gender value:
-  if ($gender == 'M') {
-    echo '<p><strong>Good day, Sir!</strong></p>';
-  } elseif ($gender == 'F') {
-    echo '<p><strong>Good day, Madam!</strong></p>';
-  } else { // No gender selected.
-    echo '<p><strong>>You forgot to enter your gender!</strong></p>';
-  }
+  // Print a message addressed to the instructor:
+  echo "<p><strong>Good day, $instructorName!</strong></p>";
 ?>
 </body>
 </html>
