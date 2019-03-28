@@ -13,7 +13,7 @@
 <body>
 <?php # Script 2.4 - handle_form.php #3
 
-// Rewrite handle_form.php (Script 2.4) to use $_POST instead of $_REQUEST.
+// 4. Rewrite handle_form.php (Script 2.4) to use $_POST instead of $_REQUEST.
 
 // Validate the name:
 if (!empty($_POST['name'])) {
@@ -54,6 +54,10 @@ if (isset($_POST['gender']) && $gender == 'M') { // Gender is set and value is e
 	$gender = NULL;
 	echo '<p class="error">You forgot to select your gender!</p>';
 }
+
+// 5. Rewrite handle_form.php (Script 2.4) so that it validates the age element. Hint: Use the $gender validation as a template, this time checking against the corresponding pull-down option values (0–29, 30–60, 60+).
+
+// Validate the age:
 
 // If everything is OK, print the message:
 if ($name && $email && $gender && $comments) {
