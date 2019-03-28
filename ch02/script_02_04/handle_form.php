@@ -63,11 +63,11 @@ if (isset($_POST['gender']) && $gender == 'M') { // Gender is set and value is e
 $age = $_POST['age'];
 
 if (isset($_POST['age']) && $age == '0-29') { // Age is set and value is equal to 0-29
-	$greeting = '<p><strong>Good day, young buck!</strong></p>';
+	$greeting .= ' ' . '<p><strong>What a young buck!</strong></p>';
 } elseif (isset($_POST['age']) && $age == '30-60') { // Age is set and value is equal to 30-60
-	$greeting = '<p><strong>Good mid-life crisis to you!</strong></p>';
-} elseif (isset($_POST['age']) && $age == '30-60') { // Age is set and value is equal to Over 60
-	$greeting = '<p><strong>Good day, you old codger!</strong></p>';
+	$greeting .= ' ' . '<p><strong>You\'ve seen many moons, but many moons still await!</strong></p>';
+} elseif (isset($_POST['age']) && $age == '60+') { // Age is set and value is equal to 60+
+	$greeting .= ' ' . '<p><strong>You old codger!</strong></p>';
 } elseif (isset($_POST['age']) && $age = NULL ){ // Unacceptable value.
 	echo '<p class="error">Age should be either "Under 30", "Between 30 and 60" or "Over 60"!</p>';
 } else { // $_POST['age'] is not set.
