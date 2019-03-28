@@ -25,16 +25,16 @@
 
 <?php
   // Courses array
-  $interests = $_POST['interests'];
-  if(empty($interests)){
-    echo("You didn't select any interests.");
-  }else{
-    $N = count($interests);
-    echo("<p>You selected $N interests: </p>");
+  $completedCourses = count($_POST['courses']);
+  $sortedCourses = sort($_POST['courses']);
 
-    sort($interests);
-    for($i=0; $i < $N; $i++){
-    //   sort($interests[$i] . "<br>" . " ");
+  if (empty($_POST['courses'])){
+    echo "You didn't select any courses";
+  } else {
+    echo "You've completed {$completedCourses}:"/n;
+
+    foreach ($sortedCourses as $course) {
+      echo $course;
     }
   }
   ?>
