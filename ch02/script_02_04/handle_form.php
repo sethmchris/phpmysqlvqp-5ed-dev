@@ -41,6 +41,7 @@ if (!empty($_POST['comments'])) {
 
 
 // 3. Rewrite the gender conditional in handle_form.php (Script 2.4) as one conditional instead of two nested ones. Hint: You’ll need to use the AND operator.
+
 // Validate the gender:
 $gender = $_POST['gender'];
 
@@ -59,8 +60,23 @@ if (isset($_POST['gender']) && $gender == 'M') { // Gender is set and value is e
 
 // Validate the age:
 
+$age = $_POST['age'];
+
+if (isset($_POST['age']) && $age == '0-29') { // Age is set and value is equal to 0-29
+	$greeting = '<p><strong>Good day, young buck!</strong></p>';
+} elseif (isset($_POST['age']) && $age == '30-60') { // Age is set and value is equal to 30-60
+	$greeting = '<p><strong>Good mid-life crisis to you!</strong></p>';
+} elseif (isset($_POST['age']) && $age == '30-60') { // Age is set and value is equal to Over 60
+	$greeting = '<p><strong>Good day, you old codger!</strong></p>';
+} elseif (isset($_POST['age']) && $age = NULL ){ // Unacceptable value.
+	echo '<p class="error">Age should be either "Under 30", "Between 30 and 60" or "Over 60"!</p>';
+} else { // $_POST['age'] is not set.
+	$age = NULL;
+	echo '<p class="error">You forgot to select your age!</p>';
+}
+
 // If everything is OK, print the message:
-if ($name && $email && $gender && $comments) {
+if ($name && $email && $gender && $age && $comments) {
 
 	echo "<p>Thank you, <strong>$name</strong>, for the following comments:</p>
 	<pre>$comments</pre>
