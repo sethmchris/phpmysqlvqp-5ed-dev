@@ -15,14 +15,19 @@
   $comments = $_REQUEST['comments'];
 
   // Create the $instructorName variable:
-	if (isset($_REQUEST['instructor-name'])) {
-		$instructorName = $_REQUEST['instructor-name'];
-	} else {
-		$instructorName = NULL;
-	}
+	// if (isset($_REQUEST['instructor-name'])) {
+	// 	$instructorName = $_REQUEST['instructor-name'];
+	// } else {
+	// 	$instructorName = NULL;
+  // }
+  
+  // 7. If you’re using PHP 7 or later, change some of the conditionals to use the NULL coalescing operator instead.
+
+  // Create the $instructorName variable:
+  $instructorName = $_REQUEST['instructor-name'] ?? NULL;
 
   // Print the submitted information:
-  echo "<p>Thank you for the comments regarding the following student:<strong> $studentName</strong></p><pre>$comments</pre> <p>Submission date:<em>$date</em></p>\n";
+  echo "<p>Thank you for the comments regarding the following student:<strong> $studentName</strong></p><pre>$comments</pre> <p>Submission date: <em>$date</em></p>\n";
 
   // Print a message addressed to the instructor:
   echo "<p><strong>Good day, $instructorName!</strong></p>";
