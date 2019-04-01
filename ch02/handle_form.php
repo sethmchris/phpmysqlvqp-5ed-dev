@@ -1,22 +1,31 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<title>Form Feedback</title>
+  <meta charset="utf-8">
+  <title>Form Feedback</title>
 </head>
 <body>
-<?php # Script 2.5 - handle_form.php #4
+<?php 
+// 2. Create a new form that takes some input from the user (perhaps base it on a form you know you’ll need for one of your projects). Then create the PHP script that validates the form data and reports upon the results.
 
-// 6. Rewrite the echo statement in the final version of handle_form.php (Script 2.5) so that it uses single quotation marks and concatenation instead of double quotation marks.
+  // Create a shorthand for the form data:
+  $studentName = $_REQUEST['student-name'];
+	$instructorName = $_REQUEST['instructor-name'];
+  $date = $_REQUEST['date'];
+  $comments = $_REQUEST['comments'];
 
-// Print the submitted information:
-if ( !empty($_POST['name']) && !empty($_POST['comments']) && !empty($_POST['email']) ) {
-	echo '<p>Thank you, <strong>' . $_POST['name'] . '</strong>, for the following comments:</p>
-<pre>' . $_POST['comments'] . '</pre>' . 
-'<p>We will reply to you at <em>' . $_POST['email'] . '</em>.</p><br />';
-} else { // Missing form value.
-	echo '<p>Please go back and fill out the form again.</p>';
-}
+  // Create the $instructorName variable:
+	if (isset($_REQUEST['instructor-name'])) {
+		$instructorName = $_REQUEST['instructor-name'];
+	} else {
+		$instructorName = NULL;
+	}
+
+  // Print the submitted information:
+  echo "<p>Thank you for the comments regarding the following student:<strong> $studentName</strong></p><pre>$comments</pre> <p>Submission date:<em>$date</em></p>\n";
+
+  // Print a message addressed to the instructor:
+  echo "<p><strong>Good day, $instructorName!</strong></p>";
 ?>
 </body>
 </html>
