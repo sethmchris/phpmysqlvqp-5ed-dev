@@ -10,7 +10,7 @@
 
   // Create a shorthand for the form data:
   $studentName = $_REQUEST['student-name'];
-	$instructorName = $_REQUEST['instructor-name'];
+  $instructorName = $_REQUEST['instructor-name'];
   $date = $_REQUEST['date'];
   $comments = $_REQUEST['comments'];
 
