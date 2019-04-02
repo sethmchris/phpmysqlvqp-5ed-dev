@@ -1,6 +1,6 @@
 <?php
 
-// 6a. As a more advanced trick, rewrite calculator.php so that the create_radio() function call is in the script only once but still creates three radio buttons. Hint: Use a loop.
+# 6a. As a more advanced trick, rewrite calculator.php so that the create_radio() function call is in the script only once but still creates three radio buttons. Hint: Use a loop.
 
 // This function creates radio buttons by iterating through an array of values.
 // The function takes two arguments: the values array and the name.
@@ -45,20 +45,20 @@ include('includes/header.html');
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   // Minimal form validation:
-  // 4b. Add the $_POST value of average_speed
+  # 4b. Add the $_POST value of average_speed
 	if (isset($_POST['distance'], $_POST['gallon_price'], $_POST['efficiency'], $_POST['average_speed']) &&
 	 is_numeric($_POST['distance']) && is_numeric($_POST['gallon_price']) && is_numeric($_POST['efficiency']) && is_numeric($_POST['average_speed']) ) {
 
 		// Calculate the results:
 		$cost = calculate_trip_cost($_POST['distance'], $_POST['efficiency'], $_POST['gallon_price'], $_POST['average_speed']);
-		// 3a. Change calculator.php so that it uses a constant in lieu of the hard-coded average speed of 65. (As written, the average speed is a “magic number”—a value used in a script without explanation.)
+		# 3a. Change calculator.php so that it uses a constant in lieu of the hard-coded average speed of 65. (As written, the average speed is a “magic number”—a value used in a script without explanation.)
 		// $average_speed = 65; // The average miles per hour as suggested by the book
     // $hours = $_POST['distance']/$average_speed;
     
-    // 4c. Divide by the $_POST value of average_speed instead of the constant or hard-coded value
+    # 4c. Divide by the $_POST value of average_speed instead of the constant or hard-coded value
 		$hours = $_POST['distance']/$_POST['average_speed'];
 
-    // 4d. Print the $_POST value of average_speed
+    # 4d. Print the $_POST value of average_speed
 		// Print the results:
 		echo '<div class="page-header"><h1>Total Estimated Cost</h1></div>
 		<p>The total cost of driving ' . $_POST['distance'] . ' miles, averaging ' . $_POST['efficiency'] . ' miles per gallon, and paying an average of $' . $_POST['gallon_price'] . ' per gallon, is $' . $cost . '. If you drive at an average of ' . $_POST['average_speed'] . ' miles per hour, the trip will take approximately ' . number_format($hours, 2) . ' hours.</p>';
