@@ -6,7 +6,7 @@
 </head>
 <body>
 <?php 
-// 2. Create a new form that takes some input from the user (perhaps base it on a form you know you’ll need for one of your projects). Then create the PHP script that validates the form data and reports upon the results.
+  # 2. Create a new form that takes some input from the user (perhaps base it on a form you know you’ll need for one of your projects). Then create the PHP script that validates the form data and reports upon the results.
 
   // Create a shorthand for the form data:
   $studentName = $_REQUEST['student-name'];
@@ -21,7 +21,7 @@
 	// 	$instructorName = NULL;
   // }
   
-  // 7. If you’re using PHP 7 or later, change some of the conditionals to use the NULL coalescing operator instead.
+  # 7. If you’re using PHP 7 or later, change some of the conditionals to use the NULL coalescing operator instead.
 
   // Create the $instructorName variable:
   $instructorName = $_REQUEST['instructor-name'] ?? NULL;

@@ -11,9 +11,9 @@
 	</style>
 </head>
 <body>
-<?php # Script 2.4 - handle_form.php #3
+<?php # Modified version of Script 2.4 - handle_form.php #3
 
-// 4. Rewrite handle_form.php (Script 2.4) to use $_POST instead of $_REQUEST.
+# 4. Rewrite handle_form.php (Script 2.4) to use $_POST instead of $_REQUEST.
 
 // Validate the name:
 if (!empty($_POST['name'])) {
@@ -40,7 +40,7 @@ if (!empty($_POST['comments'])) {
 }
 
 
-// 3. Rewrite the gender conditional in handle_form.php (Script 2.4) as one conditional instead of two nested ones. Hint: You’ll need to use the AND operator.
+# 3. Rewrite the gender conditional in handle_form.php (Script 2.4) as one conditional instead of two nested ones. Hint: You’ll need to use the AND operator.
 
 // Validate the gender:
 $gender = $_POST['gender'];
@@ -56,7 +56,7 @@ if (isset($_POST['gender']) && $gender == 'M') { // Gender is set and value is e
 	echo '<p class="error">You forgot to select your gender!</p>';
 }
 
-// 5. Rewrite handle_form.php (Script 2.4) so that it validates the age element. Hint: Use the $gender validation as a template, this time checking against the corresponding pull-down option values (0–29, 30–60, 60+).
+# 5. Rewrite handle_form.php (Script 2.4) so that it validates the age element. Hint: Use the $gender validation as a template, this time checking against the corresponding pull-down option values (0–29, 30–60, 60+).
 
 // Validate the age:
 

@@ -5,9 +5,9 @@
 	<title>Form Feedback</title>
 </head>
 <body>
-<?php # Script 2.5 - handle_form.php #4
+<?php # Modified version of Script 2.5 - handle_form.php #4
 
-// 6. Rewrite the echo statement in the final version of handle_form.php (Script 2.5) so that it uses single quotation marks and concatenation instead of double quotation marks.
+# 6. Rewrite the echo statement in the final version of handle_form.php (Script 2.5) so that it uses single quotation marks and concatenation instead of double quotation marks.
 
 // Print the submitted information:
 if ( !empty($_POST['name']) && !empty($_POST['comments']) && !empty($_POST['email']) ) {
