@@ -58,12 +58,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		# 4c. Divide by the $_POST value of average_speed instead of the constant or hard-coded value
 		$hours = $_POST['distance']/$_POST['average_speed'];
 
-		# 5. Update the output of calculator.php so that it displays the number of days and hours the trip will take when the number of hours is greater than 24.
+		# 5a. Update the output of calculator.php so that it displays the number of days and hours the trip will take when the number of hours is greater than 24. (Add if statement to calculate_trip_cost() function)
 		if ($hours > 24.00) {
 			$days = floor($hours / 24);
 			$hours = $hours % 24;
 		}
-    # 4d. Print the $_POST value of average_speed
+		# 4d. Print the $_POST value of average_speed
+		# 5b. Add $days variable to results
 		// Print the results:
 		echo '<div class="page-header"><h1>Total Estimated Cost</h1></div>
 		<p>The total cost of driving ' . $_POST['distance'] . ' miles, averaging ' . $_POST['efficiency'] . ' miles per gallon, and paying an average of $' . $_POST['gallon_price'] . ' per gallon, is $' . $cost . '. If you drive at an average of ' . $_POST['average_speed'] . ' miles per hour, the trip will take approximately ' . number_format(isset($days)) . ' days and ' . number_format($hours) . ' hours.</p>';
