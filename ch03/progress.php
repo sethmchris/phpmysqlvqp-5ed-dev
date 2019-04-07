@@ -21,7 +21,7 @@ function create_radio($values = array('16', '24'), $name = 'pace') {
 } // End of create_radio() function.
 
 // This function calculates the student's progress percentage.
-// The function takes three arguments: the hours completed so far, the hours corresponding with their block week, and the minmum required hours.
+// The function takes three arguments: the hours completed so far, the hours corresponding with their block week, and the required pace.
 // The function returns the progress percentage.
 function calculate_student_progress($completed_hours, $total_hours, $pace) {
 
@@ -58,13 +58,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		echo '<div class="page-header"><h1>Estimated Progress Percentage</h1></div>
 		<p>The progress percentage for ' . $_POST['student'] . ' who has completed ' . $_POST['completed_hours'] . ' hours, at a pace of ' . $_POST['pace'] . ' hours per week, and ' . $_POST['total_hours'] . ' hours into their block is <strong>' . $student_progress . '%</strong>.</p>';
 
-		// 2c. Print the results:
+		# 2c. Print the results:
 		echo '<p>Additional Comments: ' . $_POST['comments'] . ',';
 		if (isset($_POST['register'])) {
 			echo ' student needs to register for a new block</p>';
 		}
 		
-		// 2d. If a student decides to include a set of multiple checkboxes, print the results using a loop.
+		# 2d. If a student decides to include a set of multiple checkboxes, print the results using a loop.
 		echo '<p>Additional Notifications:<br />';
 		if (isset($_POST['notification'])) {
 			foreach ($_POST['notification'] as $notified) {
