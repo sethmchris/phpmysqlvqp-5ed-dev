@@ -20,7 +20,7 @@ function create_radio($values = array('3.50', '4.00', '4.50'), $name = 'gallon_p
 	echo "> $value ";
 	} // End of foreach loop.
 
-} // End of create_gallon_radio() function.
+} // End of create_radio() function.
 
 // This function calculates the cost of the trip.
 // The function takes three arguments: the distance, the fuel efficiency, and the price per gallon.
@@ -39,7 +39,7 @@ function calculate_trip_cost($miles, $mpg, $ppg) {
 } // End of calculate_trip_cost() function.
 
 $page_title = 'Trip Cost Calculator';
-include('includes/header.html');
+include('includes/header-calc.html');
 
 // Check for form submission:
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -92,4 +92,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	<p><input type="submit" name="submit" value="Calculate!"></p>
 </form>
 
-<?php include('includes/footer.html'); ?>
+<?php include('includes/footer-calc.html'); ?>
