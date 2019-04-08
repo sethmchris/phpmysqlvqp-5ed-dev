@@ -1,5 +1,5 @@
 # ---------
-# Create, populate, and manipulate your own table of data.
+# 5. Create, populate, and manipulate your own table of data.
 # ---------
 
 CREATE TABLE students (
