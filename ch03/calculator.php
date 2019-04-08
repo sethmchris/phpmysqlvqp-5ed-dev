@@ -20,7 +20,7 @@ function create_radio($values = array('3.50', '4.00', '4.50'), $name = 'gallon_p
 	echo "> $value ";
 	} // End of foreach loop.
 
-} // End of create_gallon_radio() function.
+} // End of create_radio() function.
 
 // This function calculates the cost of the trip.
 // The function takes three arguments: the distance, the fuel efficiency, and the price per gallon.
@@ -39,7 +39,7 @@ function calculate_trip_cost($miles, $mpg, $ppg) {
 } // End of calculate_trip_cost() function.
 
 $page_title = 'Trip Cost Calculator';
-include('includes/header.html');
+include('includes/header-calc.html');
 
 // Check for form submission:
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -55,13 +55,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		// $average_speed = 65; // The average miles per hour as suggested by the book
     // $hours = $_POST['distance']/$average_speed;
     
-    # 4c. Divide by the $_POST value of average_speed instead of the constant or hard-coded value
+		# 4c. Divide by the $_POST value of average_speed instead of the constant or hard-coded value
 		$hours = $_POST['distance']/$_POST['average_speed'];
 
+		# 5. Update the output of calculator.php so that it displays the number of days and hours the trip will take when the number of hours is greater than 24.
+		if ($hours > 24.00) {
+			$days = floor($hours / 24);
+			$hours = $hours % 24;
+		}
     # 4d. Print the $_POST value of average_speed
 		// Print the results:
 		echo '<div class="page-header"><h1>Total Estimated Cost</h1></div>
-		<p>The total cost of driving ' . $_POST['distance'] . ' miles, averaging ' . $_POST['efficiency'] . ' miles per gallon, and paying an average of $' . $_POST['gallon_price'] . ' per gallon, is $' . $cost . '. If you drive at an average of ' . $_POST['average_speed'] . ' miles per hour, the trip will take approximately ' . number_format($hours, 2) . ' hours.</p>';
+		<p>The total cost of driving ' . $_POST['distance'] . ' miles, averaging ' . $_POST['efficiency'] . ' miles per gallon, and paying an average of $' . $_POST['gallon_price'] . ' per gallon, is $' . $cost . '. If you drive at an average of ' . $_POST['average_speed'] . ' miles per hour, the trip will take approximately ' . number_format(isset($days)) . ' days and ' . number_format($hours) . ' hours.</p>';
 
 	} else { // Invalid submitted values.
 		echo '<div class="page-header"><h1>Error!</h1></div>
@@ -92,4 +97,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	<p><input type="submit" name="submit" value="Calculate!"></p>
 </form>
 
-<?php include('includes/footer.html'); ?>
+<?php include('includes/footer-calc.html'); ?>
