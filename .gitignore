@@ -1,3 +1,4 @@
 .DS_Store
 .ftpconfig
+.vscode
 ch09/mysqli_connect.php
