@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$qEmail = "SELECT user_id FROM users WHERE email='$e'";
 		$rEmail =  @mysqli_query($dbc, $qEmail);
 		// Check that the email address hasn't already been registered and it's safe to run the following INSERT statement
-		if (mysqli_num_rows($rEmail == 0)) { // If it ran okay
+		if (mysqli_num_rows($rEmail) == 0) { // If it ran okay
 
 			// Make the query:
 			$q = "INSERT INTO users (first_name, last_name, email, pass, registration_date) VALUES ('$fn', '$ln', '$e', SHA2('$p', 512), NOW() )";
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		} else { // If it did not run okay
 
 			// Print a message:
-			echo '<h1>System Error</h1>
+			echo '<h1>Error!</h1>
 			<p>This email address has already been registered.</p>';
 		}
 
