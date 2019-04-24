@@ -14,6 +14,7 @@ $q = "SELECT CONCAT(last_name, ', ', first_name) AS name, DATE_FORMAT(registrati
 $r = @mysqli_query($dbc, $q); // Run the query.
 
 // Count the number of returned rows:
+// Added by me
 if (mysqli_num_rows($r) > 0) {
 	$num = mysqli_num_rows($r);
 } else {
@@ -21,7 +22,7 @@ if (mysqli_num_rows($r) > 0) {
 }
 // $num = mysqli_num_rows($r);
 
-if ($num) { // If it ran OK, display the records.
+if ($num > 0) { // If it ran OK, display the records.
 
 	// Print how many users there are:
 	echo "<p>There are currently $num registered users.</p>\n";
