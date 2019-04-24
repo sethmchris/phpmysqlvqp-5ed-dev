@@ -48,14 +48,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		// Register the user in the database...
 
 		// Make the query:
-		$q2 = "SELECT user_id FROM users WHERE email=’$e’";
-		$r2 = @mysqli_query($dbc, $q2);
-		if (mysqli_num_rows($r2 > 0)) {
-			// echo "email has been used"
-		} else {
+		// $q2 = "SELECT user_id FROM users WHERE email=’$e’";
+		// $r2 = @mysqli_query($dbc, $q2);
+		// if (mysqli_num_rows($r2 > 0)) {
+		// 	echo "email has been used";
+		// } else {
 			$q = "INSERT INTO users (first_name, last_name, email, pass, registration_date) VALUES ('$fn', '$ln', '$e', SHA2('$p', 512), NOW() )";
 			$r = @mysqli_query($dbc, $q); // Run the query.
-		}
+		// }
 
 		if ($r) { // If it ran OK.
 
