@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 		// Register the user in the database...
 
-		# 4a. Apply the mysqli_num_rows() function to register.php, as suggested in the “Modifying register.php” sidebar.
+		# 4. Apply the mysqli_num_rows() function to register.php, as suggested in the “Modifying register.php” sidebar.
 		$q2 = "SELECT user_id FROM users WHERE email='$e'";
 		$r2 =  @mysqli_query($dbc, $q2);
 		// Check that the email address hasn't alref ($num == 1) {ady been registered and it's safe to run the following INSERT statement
@@ -84,7 +84,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		include('includes/footer.html');
 		exit();
 
-	} else {
+	} 
+	else { // 4a. If it did not run OK.
+		// 4b. Print a message:
 		echo '<h1>Error!</h1>
 		<p class="error">The following error(s) occurred:<br>
 		- This email has alredy been used</p>';
