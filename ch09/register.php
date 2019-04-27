@@ -84,8 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		include('includes/footer.html');
 		exit();
 
-	} 
-	else { // 4a. If it did not run OK.
+	} else { // 4a. If it did not run OK.
 		// 4b. Print a message:
 		echo '<h1>Error!</h1>
 		<p class="error">The following error(s) occurred:<br>
