@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		
 		// if ($r) { // If it ran OK.
 
-		# 5. Apply the mysqli_num_rows() function to register.php, as suggested in the “Modifying register.php” sidebar.
+		# 5. Apply the mysqli_affected_rows() function to register.php to confirm that the INSERT worked.
 		if (mysqli_affected_rows($dbc) == 1) { // If it ran OK.
 		
 			// Print a message:
