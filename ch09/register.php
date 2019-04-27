@@ -47,26 +47,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 		// Register the user in the database...
 
-		# 4. Apply the mysqli_num_rows() function to register.php, as suggested in the “Modifying register.php” sidebar.
-		$qEmail = "SELECT user_id FROM users WHERE email='$e'";
-		$rEmail =  @mysqli_query($dbc, $qEmail);
-		// Check that the email address hasn't already been registered and it's safe to run the following INSERT statement
-		if (mysqli_num_rows($rEmail) == 0) { // If it ran okay
+		# 4a. Apply the mysqli_num_rows() function to register.php, as suggested in the “Modifying register.php” sidebar.
+		$q2 = "SELECT user_id FROM users WHERE email='$e'";
+		$r2 =  @mysqli_query($dbc, $q2);
+		// Check that the email address hasn't alref ($num == 1) {ady been registered and it's safe to run the following INSERT statement
+		$num = mysqli_num_rows($r2);
+
+		if ($num == 0) { // If it ran OK.
 
 			// Make the query:
 			$q = "INSERT INTO users (first_name, last_name, email, pass, registration_date) VALUES ('$fn', '$ln', '$e', SHA2('$p', 512), NOW() )";
 
 			$r = @mysqli_query($dbc, $q); // Run the query.
-
-		} else { // If it did not run okay
-
-			// Print a message:
-			echo '<h1>Error!</h1>
-			<p>This email address has already been registered.</p>';
-		}
-
-		// if ($r) { // If it ran OK.
 		
+		// if ($r) { // If it ran OK.
+
 		# 5. Apply the mysqli_num_rows() function to register.php, as suggested in the “Modifying register.php” sidebar.
 		if (mysqli_affected_rows($dbc) == 1) { // If it ran OK.
 		
@@ -75,14 +70,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		<p>You are now registered. In Chapter 12 you will actually be able to log in!</p><p><br></p>';
 
 		} else { // If it did not run OK.
-
 			// Public message:
 			echo '<h1>System Error</h1>
 			<p class="error">You could not be registered due to a system error. We apologize for any inconvenience.</p>';
 
 			// Debugging message:
 			echo '<p>' . mysqli_error($dbc) . '<br><br>Query: ' . $q . '</p>';
-
 		} // End of if ($r) IF.
 
 		mysqli_close($dbc); // Close the database connection.
@@ -91,8 +84,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		include('includes/footer.html');
 		exit();
 
-	} else { // Report the errors.
-
+	} else {
+		echo '<h1>Error!</h1>
+		<p class="error">The following error(s) occurred:<br>
+		- This email has alredy been used</p>';
+	} // End of if ($num == 0) IF.
+}	else { // Report the errors.
 		echo '<h1>Error!</h1>
 		<p class="error">The following error(s) occurred:<br>';
 		foreach ($errors as $msg) { // Print each error.
