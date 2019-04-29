@@ -1,4 +1,4 @@
-<?php # Script 9.6 - view_users.php #2
+<?php # Modified version of Script 9.6 - view_users.php #2
 // This script retrieves all the records from the users table.
 
 $page_title = 'View the Current Users';
@@ -14,8 +14,8 @@ $q = "SELECT CONCAT(last_name, ', ', first_name) AS name, DATE_FORMAT(registrati
 $r = @mysqli_query($dbc, $q); // Run the query.
 
 // $num = mysqli_num_rows($r);
-# 3. Change the use of mysqli_num_rows() in view_users.php so that it’s called only if the query had a TRUE result.
 
+# 3. Change the use of mysqli_num_rows() in view_users.php so that it’s called only if the query had a TRUE result.
 if ($r) { // Check if the query had a TRUE result
 	// Count the number of returned rows:
 	$num = mysqli_num_rows($r);
