@@ -54,7 +54,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$num = mysqli_num_rows($r2);
 
 		if ($num == 0) { // If it ran OK.
-
 			// Make the query:
 			$q = "INSERT INTO users (first_name, last_name, email, pass, registration_date) VALUES ('$fn', '$ln', '$e', SHA2('$p', 512), NOW() )";
 
@@ -76,15 +75,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 			// Debugging message:
 			echo '<p>' . mysqli_error($dbc) . '<br><br>Query: ' . $q . '</p>';
+
 		} // End of if ($r) IF.
 
-		mysqli_close($dbc); // Close the database connection.
+			mysqli_close($dbc); // Close the database connection.
 
-		// Include the footer and quit the script:
-		include('includes/footer.html');
-		exit();
-
-	} else { // 4a. If it did not run OK.
+			// Include the footer and quit the script:
+			include('includes/footer.html');
+			exit();
+			
+    } else { // 4a. If it did not run OK.
 		// 4b. Print a message:
 		echo '<h1>Error!</h1>
 		<p class="error">The following error(s) occurred:<br>
