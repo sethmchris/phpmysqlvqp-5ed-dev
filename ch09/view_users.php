@@ -13,14 +13,13 @@ require('../mysqli_connect.php'); // Connect to the db.
 $q = "SELECT CONCAT(last_name, ', ', first_name) AS name, DATE_FORMAT(registration_date, '%M %d, %Y') AS dr FROM users ORDER BY registration_date ASC";
 $r = @mysqli_query($dbc, $q); // Run the query.
 
-// Count the number of returned rows:
-// Added by me
-if (mysqli_num_rows($r) > 0) {
-	$num = mysqli_num_rows($r);
-} else {
-	$num = FALSE;
-}
 // $num = mysqli_num_rows($r);
+# 3. Change the use of mysqli_num_rows() in view_users.php so that it’s called only if the query had a TRUE result.
+
+if ($r) { // Check if the query had a TRUE result
+	// Count the number of returned rows:
+	$num = mysqli_num_rows($r);
+}
 
 if ($num > 0) { // If it ran OK, display the records.
 
