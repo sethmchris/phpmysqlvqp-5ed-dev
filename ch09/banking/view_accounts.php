@@ -1,4 +1,4 @@
-<?php # Script 9.4 - view_users.php
+<?php # Modified version of Script 9.6 - view_users.php #2
 // This script retrieves all the records from the users table.
 
 $page_title = 'View the Current Users';
@@ -7,13 +7,24 @@ include('includes/header.html');
 // Page header:
 echo '<h1>Registered Users</h1>';
 
-require('../mysqli_connect.php'); // Connect to the db.
+require('../../mysqli_connect.php'); // Connect to the db.
 
 // Make the query:
 $q = "SELECT CONCAT(last_name, ', ', first_name) AS name, DATE_FORMAT(registration_date, '%M %d, %Y') AS dr FROM users ORDER BY registration_date ASC";
 $r = @mysqli_query($dbc, $q); // Run the query.
 
-if ($r) { // If it ran OK, display the records.
+// $num = mysqli_num_rows($r);
+
+# 3. Change the use of mysqli_num_rows() in view_users.php so that it’s called only if the query had a TRUE result.
+if ($r) { // Check if the query had a TRUE result
+	// Count the number of returned rows:
+	$num = mysqli_num_rows($r);
+}
+
+if ($num > 0) { // If it ran OK, display the records.
+
+	// Print how many users there are:
+	echo "<p>There are currently $num registered users.</p>\n";
 
 	// Table header.
 	echo '<table width="60%">
@@ -36,15 +47,11 @@ if ($r) { // If it ran OK, display the records.
 
 	mysqli_free_result ($r); // Free up the resources.
 
-} else { // If it did not run OK.
+} else { // If no records were returned.
 
-	// Public message:
-	echo '<p class="error">The current users could not be retrieved. We apologize for any inconvenience.</p>';
+	echo '<p class="error">There are currently no registered users.</p>';
 
-	// Debugging message:
-	echo '<p>' . mysqli_error($dbc) . '<br><br>Query: ' . $q . '</p>';
-
-} // End of if ($r) IF.
+}
 
 mysqli_close($dbc); // Close the database connection.
 

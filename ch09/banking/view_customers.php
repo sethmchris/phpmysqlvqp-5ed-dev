@@ -1,16 +1,16 @@
 <?php # Modified version of Script 9.6 - view_users.php #2
-// This script retrieves all the records from the users table.
+// This script retrieves all the records from the customers table.
 
-$page_title = 'View the Current Users';
+$page_title = 'View the Current Customers';
 include('includes/header.html');
 
 // Page header:
-echo '<h1>Registered Users</h1>';
+echo '<h1>Customers</h1>';
 
-require('../mysqli_connect.php'); // Connect to the db.
+require('../../mysqli_connect.php'); // Connect to the db.
 
 // Make the query:
-$q = "SELECT CONCAT(last_name, ', ', first_name) AS name, DATE_FORMAT(registration_date, '%M %d, %Y') AS dr FROM users ORDER BY registration_date ASC";
+$q = "SELECT last_name, first_name  FROM users ORDER BY last_name ASC";
 $r = @mysqli_query($dbc, $q); // Run the query.
 
 // $num = mysqli_num_rows($r);
@@ -24,14 +24,14 @@ if ($r) { // Check if the query had a TRUE result
 if ($num > 0) { // If it ran OK, display the records.
 
 	// Print how many users there are:
-	echo "<p>There are currently $num registered users.</p>\n";
+	echo "<p>There are currently $num customers.</p>\n";
 
 	// Table header.
 	echo '<table width="60%">
 	<thead>
 	<tr>
-		<th align="left">Name</th>
-		<th align="left">Date Registered</th>
+		<th align="left">Last Name</th>
+		<th align="left">First Name</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -39,7 +39,7 @@ if ($num > 0) { // If it ran OK, display the records.
 
 	// Fetch and print all the records:
 	while ($row = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
-		echo '<tr><td align="left">' . $row['name'] . '</td><td align="left">' . $row['dr'] . '</td></tr>
+		echo '<tr><td align="left">' . $row['first_name'] . '</td><td align="left">' . $row['last_name'] . '</td></tr>
 		';
 	}
 
