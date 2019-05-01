@@ -18,23 +18,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$id = mysqli_real_escape_string($dbc, trim($_POST['customer_id']));
 	}
 
-	// Check for the current password:
-	if (empty($_POST['pass'])) {
-		$errors[] = 'You forgot to enter your current password.';
-	} else {
-		$p = mysqli_real_escape_string($dbc, trim($_POST['pass']));
-	}
+	// Check for a deposit or withdrawl amount:
+	if (empty($_POST['add']) && empty($_POST['subtract'])) {
+		$errors[] = 'You didn\'t enter a deposit or withdrawl amount';
+	} 
 
-	// Check for a new password and match
-	// against the confirmed password:
-	if (!empty($_POST['pass1'])) {
-		if ($_POST['pass1'] != $_POST['pass2']) {
-			$errors[] = 'Your new password did not match the confirmed password.';
-		} else {
-			$np = mysqli_real_escape_string($dbc, trim($_POST['pass1']));
-		}
-	} else {
-		$errors[] = 'You forgot to enter your new password.';
+  //
+	// Check that input is numeric
+	//
+	
+	// elseif (!is_numeric($_POST['add']) || !is_numeric($_POST['subtract'])) { 
+	// 	$errors[] = 'You didn\'t enter a valid amount';
+	// } 
+	else {
+		$b = mysqli_real_escape_string($dbc, trim($_POST['add']));
+		$b = mysqli_real_escape_string($dbc, trim($_POST['subtract']));
 	}
 
 	if (empty($errors)) { // If everything's OK.
@@ -49,20 +47,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$row = mysqli_fetch_array($r, MYSQLI_NUM);
 
 			// Make the UPDATE query:
-			$q = "UPDATE users SET pass=SHA2('$np', 512) WHERE user_id=$row[0]";
+
+			//
+			// Add or subtract balance, don't replace balance
+			//
+
+			$q = "UPDATE accounts SET balance=$b WHERE customer_id=$row[0]";
 			$r = @mysqli_query($dbc, $q);
 
 			if (mysqli_affected_rows($dbc) == 1) { // If it ran OK.
 
 				// Print a message.
 				echo '<h1>Thank you!</h1>
-				<p>Your password has been updated. In Chapter 12 you will actually be able to log in!</p><p><br></p>';
+				<p>Your balance has been updated.</p><p><br></p>';
 
 			} else { // If it did not run OK.
 
 				// Public message:
 				echo '<h1>System Error</h1>
-				<p class="error">Your password could not be changed due to a system error. We apologize for any inconvenience.</p>';
+				<p class="error">Your balance could not be changed due to a system error. We apologize for any inconvenience.</p>';
 
 				// Debugging message:
 				echo '<p>' . mysqli_error($dbc) . '<br><br>Query: ' . $q . '</p>';
@@ -77,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 		} else { // Invalid email address/password combination.
 			echo '<h1>Error!</h1>
-			<p class="error">The email address and password do not match those on file.</p>';
+			<p class="error">The customer_id does not match any of those on file.</p>';
 		}
 
 	} else { // Report the errors.
@@ -96,9 +99,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 } // End of the main Submit conditional.
 ?>
 <h1>Change Your Password</h1>
-<form action="password.php" method="post">
-	<p>Customer ID: <input type="text" name="customer_id" size="20" maxlength="10" value="<?php if (isset($_POST['customer_id'])) echo $_POST['customer_id']; ?>" > </p>
-	<p>Amount to Add: <input type="text" name="balance" size="10" maxlength="10" value="<?php if (isset($_POST['balance'])) echo $_POST['balance']; ?>" ></p>
+<form action="balance.php" method="post">
+	<p>Customer ID: <input type="text" name="customer_id" size="20" maxlength="10" value="<?php if (isset($_POST['customer_id'])) echo $_POST['customer_id']; ?>" ></p>
+	<p>Amount to Deposit: <input type="number" name="add" size="10" maxlength="10" value="<?php if (isset($_POST['add'])) echo $_POST['add']; ?>" ></p>
+	<p>Amount to Withdraw: <input type="number" name="subtract" size="10" maxlength="10" value="<?php if (isset($_POST['subtract'])) echo $_POST['subtract']; ?>" ></p>
 	<p>Account Type: 
 	<select name="type">
 		<option value="checking"<?php if (isset($_POST['type']) && ($_POST['type'] == 'Checking')) echo ' selected="selected"'; ?>>Checking</option>
