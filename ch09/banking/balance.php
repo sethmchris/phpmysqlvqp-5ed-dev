@@ -1,21 +1,21 @@
-<?php # Script 9.7 - password.php
+<?php # Script 9.7 - Modified version of password.php
 // This page lets a user change their password.
 
-$page_title = 'Change Your Password';
+$page_title = 'Change Account Balance';
 include('includes/header.html');
 
 // Check for form submission:
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-	require('../../mysqli_connect.php'); // Connect to the db.
+	require('../mysqli_connect2.php'); // Connect to the db.
 
 	$errors = []; // Initialize an error array.
 
-	// Check for an email address:
-	if (empty($_POST['email'])) {
-		$errors[] = 'You forgot to enter your email address.';
+	// Check for a customer ID
+	if (empty($_POST['customer_id'])) {
+		$errors[] = 'You forgot to enter your customer ID';
 	} else {
-		$e = mysqli_real_escape_string($dbc, trim($_POST['email']));
+		$id = mysqli_real_escape_string($dbc, trim($_POST['customer_id']));
 	}
 
 	// Check for the current password:
@@ -39,8 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 	if (empty($errors)) { // If everything's OK.
 
-		// Check that they've entered the right email address/password combination:
-		$q = "SELECT user_id FROM users WHERE (email='$e' AND pass=SHA2('$p', 512) )";
+		// Check that they've entered the right customer_id combination:
+		$q = "SELECT customer_id FROM accounts WHERE (customer_id='$id')";
 		$r = @mysqli_query($dbc, $q);
 		$num = @mysqli_num_rows($r);
 		if ($num == 1) { // Match was made.
@@ -97,10 +97,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 <h1>Change Your Password</h1>
 <form action="password.php" method="post">
-	<p>Email Address: <input type="email" name="email" size="20" maxlength="60" value="<?php if (isset($_POST['email'])) echo $_POST['email']; ?>" > </p>
-	<p>Current Password: <input type="password" name="pass" size="10" maxlength="20" value="<?php if (isset($_POST['pass'])) echo $_POST['pass']; ?>" ></p>
-	<p>New Password: <input type="password" name="pass1" size="10" maxlength="20" value="<?php if (isset($_POST['pass1'])) echo $_POST['pass1']; ?>" ></p>
-	<p>Confirm New Password: <input type="password" name="pass2" size="10" maxlength="20" value="<?php if (isset($_POST['pass2'])) echo $_POST['pass2']; ?>" ></p>
-	<p><input type="submit" name="submit" value="Change Password"></p>
+	<p>Customer ID: <input type="text" name="customer_id" size="20" maxlength="10" value="<?php if (isset($_POST['customer_id'])) echo $_POST['customer_id']; ?>" > </p>
+	<p>Amount to Add: <input type="text" name="balance" size="10" maxlength="10" value="<?php if (isset($_POST['balance'])) echo $_POST['balance']; ?>" ></p>
+	<p>Account Type: 
+	<select name="type">
+		<option value="checking"<?php if (isset($_POST['type']) && ($_POST['type'] == 'Checking')) echo ' selected="selected"'; ?>>Checking</option>
+		<option value="savings"<?php if (isset($_POST['type']) && ($_POST['type'] == 'Savings')) echo ' selected="selected"'; ?>>Savings</option>
+	</select>
+	<p><input type="submit" name="submit" value="Change Balance"></p>
 </form>
 <?php include('includes/footer.html'); ?>

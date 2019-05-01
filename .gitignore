@@ -2,3 +2,4 @@
 .ftpconfig
 .vscode
 mysqli_connect.php
+mysqli_connect2.php

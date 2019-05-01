@@ -7,15 +7,14 @@ include('includes/header.html');
 // Page header:
 echo '<h1>Customers</h1>';
 
-require('../../mysqli_connect.php'); // Connect to the db.
+require('../mysqli_connect2.php'); // Connect to the db.
 
 // Make the query:
-$q = "SELECT last_name, first_name  FROM users ORDER BY last_name ASC";
+$q = "SELECT CONCAT(last_name, ', ', first_name) AS name FROM customers ORDER BY last_name ASC";
 $r = @mysqli_query($dbc, $q); // Run the query.
 
 // $num = mysqli_num_rows($r);
 
-# 3. Change the use of mysqli_num_rows() in view_users.php so that it’s called only if the query had a TRUE result.
 if ($r) { // Check if the query had a TRUE result
 	// Count the number of returned rows:
 	$num = mysqli_num_rows($r);
@@ -30,8 +29,7 @@ if ($num > 0) { // If it ran OK, display the records.
 	echo '<table width="60%">
 	<thead>
 	<tr>
-		<th align="left">Last Name</th>
-		<th align="left">First Name</th>
+		<th align="left">Name</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -39,7 +37,7 @@ if ($num > 0) { // If it ran OK, display the records.
 
 	// Fetch and print all the records:
 	while ($row = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
-		echo '<tr><td align="left">' . $row['first_name'] . '</td><td align="left">' . $row['last_name'] . '</td></tr>
+		echo '<tr><td align="left">' . $row['name'] . '</td><td align="left"></tr>
 		';
 	}
 
@@ -49,7 +47,7 @@ if ($num > 0) { // If it ran OK, display the records.
 
 } else { // If no records were returned.
 
-	echo '<p class="error">There are currently no registered users.</p>';
+	echo '<p class="error">There are currently no customers.</p>';
 
 }
 
