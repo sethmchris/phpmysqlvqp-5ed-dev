@@ -52,8 +52,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		// Calculate the results:
 		$cost = calculate_trip_cost($_POST['distance'], $_POST['efficiency'], $_POST['gallon_price'], $_POST['average_speed']);
 		# 3a. Change calculator.php so that it uses a constant in lieu of the hard-coded average speed of 65. (As written, the average speed is a “magic number”—a value used in a script without explanation.)
-		// $average_speed = 65; // The average miles per hour as suggested by the book
-    // $hours = $_POST['distance']/$average_speed;
+		// define('AVERAGE_SPEED', 65); // The average miles per hour as suggested by the book
+		// $hours = $_POST['distance']/AVERAGE_SPEED;
+		
     
 		# 4c. Divide by the $_POST value of average_speed instead of the constant or hard-coded value
 		$hours = $_POST['distance']/$_POST['average_speed'];
