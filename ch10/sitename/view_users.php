@@ -9,7 +9,9 @@ echo '<h1>Registered Users</h1>';
 require('../mysqli_connect.php');
 
 // Number of records to show per page:
-$display = 10;
+// $display = 10;
+# 4. Change the value of the $display variable in view_users.php to alter the pagination
+$display = 25;
 
 // Determine how many pages there are...
 if (isset($_GET['p']) && is_numeric($_GET['p'])) { // Already been determined.
