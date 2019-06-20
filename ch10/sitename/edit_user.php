@@ -128,15 +128,22 @@ if (mysqli_num_rows($r) == 1) { // Valid user ID, show the form.
 	// Get the user's information:
 	$row = mysqli_fetch_array($r, MYSQLI_NUM);
 
+	# 3. If you're up for the challenge, modify edit_user.php so that the form elements’ values come from $_POST, if set, and the database if not.
+
+	# 3a. If UPDATE is succeful, then $row[] has the same value as $_POST[]
+	$form_fn = isset($_POST['first_name']) ? $_POST['first_name'] : $row[0];
+	$form_ln = isset($_POST['last_name']) ? $_POST['last_name'] : $row[1];
+	$form_email = isset($_POST['email']) ? $_POST['email'] : $row[2];
+
 	// Create the form:
 	# 2d. Add password inputs to the form
+	# 3b. Substitute database values with above variables to allow $_POST or database values
 	echo '<form action="edit_user.php" method="post">
-<p>First Name: <input type="text" name="first_name" size="15" maxlength="15" value="' . $row[0] . '"></p>
-<p>Last Name: <input type="text" name="last_name" size="15" maxlength="30" value="' . $row[1] . '"></p>
-<p>Email Address: <input type="email" name="email" size="20" maxlength="60" value="' . $row[2] . '"> </p>
-<p>New Password: <input type="password" name="pass1" size="10" maxlength="20" value="' . $row[3] . 
-'" ></p>
-<p>Confirm New Password: <input type="password" name="pass2" size="10" maxlength="20" value="' . $row[4] . '" ></p>
+<p>First Name: <input type="text" name="first_name" size="15" maxlength="15" value="' . $form_fn . '"></p>
+<p>Last Name: <input type="text" name="last_name" size="15" maxlength="30" value="' . $form_ln . '"></p>
+<p>Email Address: <input type="email" name="email" size="20" maxlength="60" value="' . $form_email . '"> </p>
+<p>New Password: <input type="password" name="pass1" size="10" maxlength="20" value="" ></p>
+<p>Confirm New Password: <input type="password" name="pass2" size="10" maxlength="20" value="" ></p>
 <p><input type="submit" name="submit" value="Submit"></p>
 <input type="hidden" name="id" value="' . $id . '">
 </form>';
