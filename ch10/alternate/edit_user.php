@@ -2,14 +2,10 @@
 // This page is for editing a user record.
 // This page is accessed through view_users.php.
 
-# 1b. Change the delete_user.php and edit_user.php pages so that they both display the user being affected in the browser window's title bar
-require('../mysqli_connect.php');
-$q = mysqli_fetch_assoc(mysqli_query($dbc, "SELECT CONCAT(last_name, ', ', first_name) as name FROM users WHERE user_id=" . $_GET['id']));
-$name = $q['name'];
-
-$page_title = 'Edit User: ' . $name;
-include('includes/header.html');
-echo '<h1>Edit a User</h1>';
+// Removed for Pursue 1.
+// $page_title = 'Edit a User';
+// include('includes/header.html');
+// echo '<h1>Edit a User</h1>';
 
 // Check for a valid user ID, through GET or POST:
 if ( (isset($_GET['id'])) && (is_numeric($_GET['id'])) ) { // From view_users.php
@@ -17,10 +13,31 @@ if ( (isset($_GET['id'])) && (is_numeric($_GET['id'])) ) { // From view_users.ph
 } elseif ( (isset($_POST['id'])) && (is_numeric($_POST['id'])) ) { // Form submission.
 	$id = $_POST['id'];
 } else { // No valid ID, kill the script.
+	include('includes/header.html'); # 1b. Include header since the code has moved down
+	echo '<h1>Edit a User</h1>'; # 1c. Include h1 since the code has moved down
 	echo '<p class="error">This page has been accessed in error.</p>';
 	include('includes/footer.html');
 	exit();
 }
+
+require('../mysqli_connect.php');
+
+# 1a. Change the delete_user.php and edit_user.php pages so that they both display the user being affected in the browser window's title bar
+
+// Retrieve the user's information:
+$q = "SELECT CONCAT(last_name, ', ', first_name) FROM users WHERE user_id=$id";
+$r = @mysqli_query($dbc, $q);
+
+if (mysqli_num_rows($r) == 1) { // Valid user ID, show the form.
+
+	// Get the user's information:
+	$row = mysqli_fetch_array($r, MYSQLI_NUM);
+	$page_title = 'Edit a User - ' . $row[0]; // Show the user's information in the browser window's title bar
+} else {
+$page_title = 'Edit a User';
+}
+include('includes/header.html');
+echo '<h1>Edit a User</h1>';
 
 // Check if the form has been submitted:
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
