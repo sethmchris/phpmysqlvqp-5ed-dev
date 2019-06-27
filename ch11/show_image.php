@@ -1,4 +1,5 @@
-<?php # Script 11.5 - show_image.php
+<?php # 3c. Create a corresponding versoin of show_image.php. Note: You'll need to do some research on MIME types to complete these challenges.
+			# Modified version of Script 11.5 - show_image.php
 // This page displays an image.
 
 $name = FALSE; // Flag variable:
@@ -9,7 +10,7 @@ if (isset($_GET['image'])) {
 	// Make sure it has an image's extension:
 	$ext = strtolower ( substr ($_GET['image'], -4));
 
-	if (($ext == '.jpg') OR ($ext == 'jpeg') OR ($ext == '.png')) {
+	if (($ext == '.jpg') OR ($ext == 'jpeg') OR ($ext == '.png') OR ($ext == '.svg') OR ($ext == '.svgx') OR ($ext == '.webp')) { // 3d. Check for newly-added image extensions
 
 		// Full image path:
 		$image = "../uploads/{$_GET['image']}";
