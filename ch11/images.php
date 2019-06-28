@@ -2,24 +2,25 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Images</title>
+	<title>Documents
+	</title>
 	<script charset="utf-8" src="js/function.js"></script>
 </head>
 <body>
-<p>Click on an image to view it in a separate window.</p>
+<p>Click on a document to view it in a separate window.</p>
 <ul>
-<?php # Script 11.6 - images.php
-// This script lists the images in the uploads directory.
-// This version now shows each image's file size and uploaded date and time.
+<?php # Modified version Script 11.6 - images.php
+// This script lists the documents in the uploads directory.
+// This version now shows each document's file size and uploaded date and time.
 
 // Set the default timezone:
 date_default_timezone_set('America/New_York');
 
 $dir = '../uploads'; // Define the directory to view.
 
-$files = scandir($dir); // Read all the images into an array.
+$files = scandir($dir); // Read all the documents into an array.
 
-// Display each image caption as a link to the JavaScript function:
+// Display each document caption as a link to the JavaScript function:
 foreach ($files as $image) {
 
 	if (substr($image, 0, 1) != '.') { // Ignore anything starting with a period.

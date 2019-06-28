@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 		# 3a. Make a variation on upload_image.php that supports the uploading of different file types.
 		// Validate the type. Should be JPEG or PNG.
-		$allowed = ['image/pjpeg', 'image/jpeg', 'image/JPG', 'image/X-PNG', 'image/PNG', 'image/png', 'image/x-png', 'image/svg+xml', 'image/webp']; // 3b. Added support for additional files types. In this case, I added two more image types, svg and webp
+		$allowed = ['image/pjpeg', 'image/jpeg', 'image/JPG', 'image/X-PNG', 'image/PNG', 'image/png', 'image/x-png', 'image/gif', 'text/plain']; // 3b. Added support for additional files types. In this case, I added GIF and TXT
 		if (in_array($_FILES['upload']['type'], $allowed)) {
 
 			// Move the file over.
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			} // End of move... IF.
 
 		} else { // Invalid type.
-			echo '<p class="error">Please upload a JPEG or PNG image.</p>';
+			echo '<p class="error">Please upload a JPEG, PNG, SVG, or WEBP image.</p>';
 		}
 
 	} // End of isset($_FILES['upload']) IF.
