@@ -7,6 +7,7 @@
 <body>
 <h1>Instructor Contact Form</h1>
 <?php # Script 11.1 - modified version of email.php
+# 1. Create a more custom contact form. Have the PHP script also send a more custom email, including any other data requested by the form.
 
 // Check for form submission:
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -15,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	if (!empty($_POST['student']) && !empty($_POST['email']) && !empty($_POST['instructor']) && !empty($_POST['comments']) ) {
 
 		// Create the body:
-		$body = "Instructor: {$_POST['instructor']}\n\nStudent: {$_POST['student']}\n\nDate: {$_POST['date']}\n\nComments: {$_POST['comments']}\n\n";
+		$body = "Hi {$_POST['instructor']}, {$_POST['student']} has contacted you. \n\nDate: {$_POST['date']}\n\nComments: {$_POST['comments']}\n\n";
 
 		// Make it no longer than 70 characters long:
 		$body = wordwrap($body, 70);
