@@ -15,10 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	if (!empty($_POST['student']) && !empty($_POST['email']) && !empty($_POST['instructor']) && !empty($_POST['comments']) ) {
 
 		// Create the body:
-		$body = "Instructor: {$_POST['instructor']}\n\n
-						Student: {$_POST['student']}\n\n
-						Date: {$_POST['date']}\n\n
-						Comments: {$_POST['comments']}\n\n";
+		$body = "Instructor: {$_POST['instructor']}\n\nStudent: {$_POST['student']}\n\nDate: {$_POST['date']}\n\nComments: {$_POST['comments']}\n\n";
 
 		// Make it no longer than 70 characters long:
 		$body = wordwrap($body, 70);
