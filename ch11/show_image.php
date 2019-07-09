@@ -10,7 +10,7 @@ if (isset($_GET['image'])) {
 	// Make sure it has an image's extension:
 	$ext = strtolower ( substr ($_GET['image'], -4));
 
-	if (($ext == '.jpg') OR ($ext == 'jpeg') OR ($ext == '.png') OR ($ext == '.gif') OR ($ext == '.txt')) { // 3d. Check for newly-added extensions
+	if (($ext == '.jpg') OR ($ext == 'jpeg') OR ($ext == '.png') OR ($ext == '.gif') OR ($ext == 'tiff') OR ($ext == '.tif')) { // 3d. Check for newly-added extensions
 
 		// Full image path:
 		$image = "../uploads/{$_GET['image']}";

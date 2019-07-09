@@ -20,8 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	if (isset($_FILES['upload'])) {
 
 		# 3a. Make a variation on upload_image.php that supports the uploading of different file types.
-		// Validate the type. Should be JPEG or PNG.
-		$allowed = ['image/pjpeg', 'image/jpeg', 'image/JPG', 'image/X-PNG', 'image/PNG', 'image/png', 'image/x-png', 'image/gif', 'text/plain']; // 3b. Added support for additional files types. In this case, I added GIF and TXT
+		// Validate the type. Should be JPEG, PNG, GIF, or TIFF
+		$allowed = ['image/pjpeg', 'image/jpeg', 'image/JPG', 'image/X-PNG', 'image/PNG', 'image/png', 'image/x-png', 'image/gif', 'image/tiff', 'image/x-tiff']; // 3b. Added support for additional files types. In this case, I added GIF and TIFF
 		if (in_array($_FILES['upload']['type'], $allowed)) {
 
 			// Move the file over.
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			} // End of move... IF.
 
 		} else { // Invalid type.
-			echo '<p class="error">Please upload a JPEG, PNG, SVG, or WEBP image.</p>';
+			echo '<p class="error">Please upload a JPEG, PNG, GIF, or TIFF file</p>';
 		}
 
 	} // End of isset($_FILES['upload']) IF.
@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 	<input type="hidden" name="MAX_FILE_SIZE" value="524288">
 
-	<fieldset><legend>Select a JPEG, PNG, SVG, or WEBP image of 512KB or smaller to be uploaded:</legend>
+	<fieldset><legend>Select a JPEG, PNG, GIF, or TIFF image of 512KB or smaller to be uploaded:</legend>
 
 	<p><strong>File:</strong> <input type="file" name="upload"></p>
 
