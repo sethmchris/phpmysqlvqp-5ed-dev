@@ -3,4 +3,5 @@
 .vscode
 mysqli_connect.php
 mysqli_connect2.php
+mysqli_connect_banking.php
 uploads/
