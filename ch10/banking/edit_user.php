@@ -3,13 +3,13 @@
 // This page is accessed through view_users.php.
 
 # 1b. Change the delete_user.php and edit_user.php pages so that they both display the user being affected in the browser window's title bar
-require('../mysqli_connect.php');
-$q = mysqli_fetch_assoc(mysqli_query($dbc, "SELECT CONCAT(last_name, ', ', first_name) as name FROM users WHERE user_id=" . $_GET['id']));
+require('../mysqli_connect_banking.php');
+$q = mysqli_fetch_assoc(mysqli_query($dbc, "SELECT CONCAT(last_name, ', ', first_name) as name FROM customers WHERE customer_id=" . $_GET['id']));
 $name = $q['name'];
 
-$page_title = 'Edit User: ' . $name;
+$page_title = 'Edit Customer: ' . $name;
 include('includes/header.html');
-echo '<h1>Edit a User</h1>';
+echo '<h1>Edit a Customer</h1>';
 
 // Check for a valid user ID, through GET or POST:
 if ( (isset($_GET['id'])) && (is_numeric($_GET['id'])) ) { // From view_users.php
@@ -41,38 +41,44 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$ln = mysqli_real_escape_string($dbc, trim($_POST['last_name']));
 	}
 
-	// Check for an email address:
-	if (empty($_POST['email'])) {
-		$errors[] = 'You forgot to enter your email address.';
-	} else {
-		$e = mysqli_real_escape_string($dbc, trim($_POST['email']));
-	}
+	// // Check for an email address:
+	// if (empty($_POST['email'])) {
+	// 	$errors[] = 'You forgot to enter your email address.';
+	// } else {
+	// 	$e = mysqli_real_escape_string($dbc, trim($_POST['email']));
+	// }
 
-	# 2a. Modify edit_user.php so that you can also change a user's password
-	// Check for a new password and match
-	// against the confirmed password:
-	if (!empty($_POST['pass1']) && (!empty($_POST['pass2']))) {
-		if ($_POST['pass1'] != $_POST['pass2']) {
-			$errors[] = 'Your new password did not match the confirmed password.';
-		} else {
-			$np = mysqli_real_escape_string($dbc, trim($_POST['pass1']));
-		}
-	} // 2b. If pass1 and pass2 are empty, then do nothing
+	// # 2a. Modify edit_user.php so that you can also change a user's password
+	// // Check for a new password and match
+	// // against the confirmed password:
+	// if (!empty($_POST['pass1']) && (!empty($_POST['pass2']))) {
+	// 	if ($_POST['pass1'] != $_POST['pass2']) {
+	// 		$errors[] = 'Your new password did not match the confirmed password.';
+	// 	} else {
+	// 		$np = mysqli_real_escape_string($dbc, trim($_POST['pass1']));
+	// 	}
+	// } // 2b. If pass1 and pass2 are empty, then do nothing
 
 	if (empty($errors)) { // If everything's OK.
 
 		//  Test for unique email address:
-		$q = "SELECT user_id FROM users WHERE email='$e' AND user_id != $id";
+		$q = "SELECT customer_id FROM customers WHERE customer_id != $id";
 		$r = @mysqli_query($dbc, $q);
 		if (mysqli_num_rows($r) == 0) {
 
 			// Make the query:
 			# 2c. If password values are submitted, update the password in the database as well
-			if (!empty($_POST['pass1']) && (!empty($_POST['pass2']))) {
-				$q = "UPDATE users SET first_name='$fn', last_name='$ln', email='$e', pass=SHA1('$np') WHERE user_id=$id LIMIT 1";
-			} else { // 2c. If these inputs are left blank, do not update the update the password in the database
-				$q = "UPDATE users SET first_name='$fn', last_name='$ln', email='$e' WHERE user_id=$id LIMIT 1";
-			}
+			// if (!empty($_POST['pass1']) && (!empty($_POST['pass2']))) {
+			// 	$q = "UPDATE users SET first_name='$fn', last_name='$ln', email='$e', pass=SHA1('$np') WHERE user_id=$id LIMIT 1";
+			// } else { // 2c. If these inputs are left blank, do not update the update the password in the database
+			// 	$q = "UPDATE users SET first_name='$fn', last_name='$ln', email='$e' WHERE user_id=$id LIMIT 1";
+			// }
+
+
+				$q = "UPDATE users SET first_name='$fn', last_name='$ln' WHERE customer_id=$id LIMIT 1";
+			
+				$q = "UPDATE users SET first_name='$fn', last_name='$ln' WHERE customer_id=$id LIMIT 1";
+
 			$r = @mysqli_query($dbc, $q);
 			if (mysqli_affected_rows($dbc) == 1) { // If it ran OK.
 
@@ -103,10 +109,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 // Always show the form...
 
 // Retrieve the user's information:
-$q = "SELECT first_name, last_name, email FROM users WHERE user_id=$id";
+$q = "SELECT first_name, last_name FROM users WHERE customer_id=$id";
 $r = @mysqli_query($dbc, $q);
 
-if (mysqli_num_rows($r) == 1) { // Valid user ID, show the form.
+if (mysqli_num_rows($r) == 0) { // Valid user ID, show the form.
 
 	// Get the user's information:
 	$row = mysqli_fetch_array($r, MYSQLI_NUM);
@@ -116,7 +122,7 @@ if (mysqli_num_rows($r) == 1) { // Valid user ID, show the form.
 	# 3a. If UPDATE is succeful, then $row[] has the same value as $_POST[]
 	$form_fn = isset($_POST['first_name']) ? $_POST['first_name'] : $row[0];
 	$form_ln = isset($_POST['last_name']) ? $_POST['last_name'] : $row[1];
-	$form_email = isset($_POST['email']) ? $_POST['email'] : $row[2];
+	$form_email = isset($_POST['customer_id']) ? $_POST['customer_id'] : $row[2];
 
 	// Create the form:
 	# 2d. Add password inputs to the form

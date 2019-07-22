@@ -2,11 +2,11 @@
 // This script retrieves all the records from the users table.
 // This new version allows the results to be sorted in different ways.
 
-$page_title = 'View the Current Users';
+$page_title = 'View the Current Customers';
 include('includes/header.html');
-echo '<h1>Registered Users</h1>';
+echo '<h1>Registered Accounts</h1>';
 
-require('../mysqli_connect.php');
+require('../mysqli_connect_banking.php');
 
 // Number of records to show per page:
 // $display = 10;
@@ -18,7 +18,7 @@ if (isset($_GET['p']) && is_numeric($_GET['p'])) { // Already been determined.
 	$pages = $_GET['p'];
 } else { // Need to determine.
  	// Count the number of records:
-	$q = "SELECT COUNT(user_id) FROM users";
+	$q = "SELECT COUNT(customer_id) FROM customers";
 	$r = @mysqli_query($dbc, $q);
 	$row = @mysqli_fetch_array($r, MYSQLI_NUM);
 	$records = $row[0];
@@ -39,7 +39,7 @@ if (isset($_GET['s']) && is_numeric($_GET['s'])) {
 
 // Determine the sort...
 // Default is by registration date.
-$sort = (isset($_GET['sort'])) ? $_GET['sort'] : 'rd';
+$sort = (isset($_GET['sort'])) ? $_GET['sort'] : 'ci';
 
 // Determine the sorting order:
 switch ($sort) {
@@ -49,17 +49,18 @@ switch ($sort) {
 	case 'fn':
 		$order_by = 'first_name ASC';
 		break;
-	case 'rd':
-		$order_by = 'registration_date ASC';
+	case 'ci':
+		$order_by = 'customer_id ASC';
 		break;
 	default:
-		$order_by = 'registration_date ASC';
-		$sort = 'rd';
+		$order_by = 'customer_id ASC';
+		$sort = 'ci';
 		break;
 }
 
 // Define the query:
-$q = "SELECT last_name, first_name, DATE_FORMAT(registration_date, '%M %d, %Y') AS dr, user_id FROM users ORDER BY $order_by LIMIT $start, $display";
+// $q = "SELECT last_name, first_name, DATE_FORMAT(registration_date, '%M %d, %Y') AS dr, user_id FROM users ORDER BY $order_by LIMIT $start, $display";
+$q = "SELECT last_name, first_name, customer_id FROM customers ORDER BY $order_by LIMIT $start, $display";
 $r = @mysqli_query($dbc, $q); // Run the query.
 
 // Table header:
@@ -70,7 +71,7 @@ echo '<table width="60%">
 	<th align="left"><strong>Delete</strong></th>
 	<th align="left"><strong><a href="view_users.php?sort=ln">Last Name</a></strong></th>
 	<th align="left"><strong><a href="view_users.php?sort=fn">First Name</a></strong></th>
-	<th align="left"><strong><a href="view_users.php?sort=rd">Date Registered</a></strong></th>
+	<th align="left"><strong><a href="view_users.php?sort=rd">Customer ID</a></strong></th>
 </tr>
 </thead>
 <tbody>
@@ -81,11 +82,11 @@ $bg = '#eeeeee';
 while ($row = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
 	$bg = ($bg=='#eeeeee' ? '#ffffff' : '#eeeeee');
 		echo '<tr bgcolor="' . $bg . '">
-		<td align="left"><a href="edit_user.php?id=' . $row['user_id'] . '">Edit</a></td>
-		<td align="left"><a href="delete_user.php?id=' . $row['user_id'] . '">Delete</a></td>
+		<td align="left"><a href="edit_user.php?id=' . $row['customer_id'] . '">Edit</a></td>
+		<td align="left"><a href="delete_user.php?id=' . $row['customer_id'] . '">Delete</a></td>
 		<td align="left">' . $row['last_name'] . '</td>
 		<td align="left">' . $row['first_name'] . '</td>
-		<td align="left">' . $row['dr'] . '</td>
+		<td align="left">' . $row['customer_id'] . '</td>
 	</tr>
 	';
 } // End of WHILE loop.

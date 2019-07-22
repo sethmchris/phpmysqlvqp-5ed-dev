@@ -3,7 +3,7 @@
 // This page is accessed through view_users.php.
 
 # 1a. Change the delete_user.php and edit_user.php pages so that they both display the user being affected in the browser window's title bar
-require('../mysqli_connect.php');
+require('../mysqli_connect_banking.php');
 $q = mysqli_fetch_assoc(mysqli_query($dbc, "SELECT CONCAT(last_name, ', ', first_name) as name FROM users WHERE user_id=" . $_GET['id']));
 $name = $q['name'];
 
@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	if ($_POST['sure'] == 'Yes') { // Delete the record.
 
 		// Make the query:
-		$q = "DELETE FROM users WHERE user_id=$id LIMIT 1";
+		$q = "DELETE FROM customers WHERE customer_id=$id LIMIT 1";
 		$r = @mysqli_query($dbc, $q);
 		if (mysqli_affected_rows($dbc) == 1) { // If it ran OK.
 
@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 } else { // Show the form.
 
 	// Retrieve the user's information:
-	$q = "SELECT CONCAT(last_name, ', ', first_name) FROM users WHERE user_id=$id";
+	$q = "SELECT CONCAT(last_name, ', ', first_name) FROM customers WHERE customer_id=$id";
 	$r = @mysqli_query($dbc, $q);
 
 	if (mysqli_num_rows($r) == 1) { // Valid user ID, show the form.
