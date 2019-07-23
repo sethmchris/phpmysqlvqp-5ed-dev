@@ -17,7 +17,7 @@ require('../mysqli_connect.php'); // Modified to use external file for privacy
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 	// Minimal form validation:
-	
+	# 6a. Add validations to the transfers script to prevent a negative transfer
 	if (isset($_POST['from'], $_POST['to'], $_POST['amount']) &&
 	 is_numeric($_POST['from']) && is_numeric($_POST['to']) && is_numeric($_POST['amount']) && $_POST['amount'] > 0) {
 
