@@ -11,7 +11,7 @@
 // This page uses transactions.
 
 // Always need the database connection:
-$dbc = mysqli_connect('localhost', 'root', '5GEh1i4DG7Js8jYb', 'banking') OR die('Could not connect to MySQL: ' . mysqli_connect_error() );
+require('../mysqli_connect.php'); // Modified to use external file for privacy
 
 // Check if the form has been submitted:
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
