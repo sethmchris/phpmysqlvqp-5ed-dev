@@ -11,18 +11,19 @@
 // This page uses transactions.
 
 // Always need the database connection:
-$dbc = mysqli_connect('localhost', 'root', '8VgS9H7gW4HG3xHL', 'banking') OR die('Could not connect to MySQL: ' . mysqli_connect_error() );
+$dbc = mysqli_connect('localhost', 'root', '5GEh1i4DG7Js8jYb', 'banking') OR die('Could not connect to MySQL: ' . mysqli_connect_error() );
 
 // Check if the form has been submitted:
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 	// Minimal form validation:
+	
 	if (isset($_POST['from'], $_POST['to'], $_POST['amount']) &&
-	 is_numeric($_POST['from']) && is_numeric($_POST['to']) && is_numeric($_POST['amount']) ) {
+	 is_numeric($_POST['from']) && is_numeric($_POST['to']) && is_numeric($_POST['amount']) && $_POST['amount'] > 0) {
 
 	 	$from = $_POST['from'];
 	 	$to = $_POST['to'];
-	 	$amount = $_POST['amount'];
+		$amount = $_POST['amount'];
 
 	 	// Make sure enough funds are available:
 		$q = "SELECT balance FROM accounts WHERE account_id=$from";
@@ -30,7 +31,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$row = mysqli_fetch_array($r, MYSQLI_ASSOC);
 		if ($amount > $row['balance']) {
 			echo '<p class="error">Insufficient funds to complete the transfer.</p>';
-		} else {
+		} elseif ($to == $from) { # 6b. Add validations to the transfers script to prevent the selection of the same account for both the “to” and “from.”
+			echo '<p class="error">Cannot transfer funds between the same account.</p>';
+		}
+		else {
 			// Turn autocommit off:
 			mysqli_autocommit($dbc, FALSE);
 
@@ -60,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		}
 
 	} else { // Invalid submitted values.
-		echo '<p class="error">Please select a valid "from" and "to" account and enter a numeric amount to transfer.</p>';
+		echo '<p class="error">Please select a valid "from" and "to" account and enter a positive numeric amount to transfer.</p>';
 	}
 
 } // End of submit conditional.
