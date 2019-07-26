@@ -1,4 +1,4 @@
-<?php # Script 12.6 - logout.php
+<?php # Modifiied version of Script 12.6 - logout.php
 // This page lets the user logout.
 
 // If no cookie is present, redirect the user:

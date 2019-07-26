@@ -1,4 +1,4 @@
-<?php # Script 12.1 login_page.inc.php
+<?php # Modified version of Script 12.1 login_page.inc.php
 // This page prints any errors associated with loggin in and it creates the entire login page, including the form.
 
 // Include the header:

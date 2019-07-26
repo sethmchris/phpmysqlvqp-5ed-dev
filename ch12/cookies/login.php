@@ -1,4 +1,4 @@
-<?php # Script 12.3 - login.php
+<?php # Modified version of Script 12.3 - login.php
 // This page processes the login form submission.
 // Upon successful login, the user is redirected.
 // Two included files are necessary.

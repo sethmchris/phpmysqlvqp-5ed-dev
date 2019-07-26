@@ -1,8 +1,5 @@
-<?php # Script 12.4 - loggedin.php
+<?php # Modifired version of Script 12.4 - loggedin.php
 // The user is redirected here from login.php
-
-// session_name("Registration");
-// session_start();
 
 // If no session is present, redirect the user:
 if (!isset($_COOKIE['user_id'])) {
