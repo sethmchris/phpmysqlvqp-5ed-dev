@@ -17,9 +17,12 @@ if (isset($errors) && !empty($errors)) {
 
 ?>
 <h1>Login</h1>
-<form action="login.php" method="post"> 
-  <p>Email Address: <input  type="email" name="email"  size="20" maxlength="60"> </p>
-  <p>Password: <input  type="password" name="pass"  size="20" maxlength="20"></p>
+<form action="login.php" method="post">
+  <!-- 2. Make the login form sticky -->
+  <p>Email Address: <input  type="email" name="email"  size="20" maxlength="60" value="<?php if (isset($_POST['email'])) echo $_POST['email']; ?>"></p>
+
+  <p>Password: <input  type="password" name="pass"  size="20" maxlength="20" value="<?php if (isset($_POST['pass'])) echo $_POST['pass']; ?>"></p>
+
   <p><input type="submit"  name="submit" value="Login"></p>
 </form>
 
