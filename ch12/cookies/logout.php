@@ -8,9 +8,9 @@ if (!isset($_COOKIE['user_id'])) {
   redirect_user();
 
 } else { // Delete the cookies:
-  setcookie('user_id', '', time()-3600, '/', '', 0, 0);
-  setcookie('first_name', '', time()-3600, '/', '', 0, 0);
-  setcookie('dark_mode', '', time()-3600, '/', '', 0, 0);
+  setcookie('user_id', $data['user_id'], time()-3600, '/', '', 0, 0);
+  setcookie('first_name', $data['user_id'], time()-3600, '/', '', 0, 0);
+  setcookie('dark_mode', $_POST['darkmode'], time()-3600, '/', '', 0, 0);
 }
 
 $page_title = 'Logged Out!';
