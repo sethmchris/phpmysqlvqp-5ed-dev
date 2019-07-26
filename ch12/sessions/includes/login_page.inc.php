@@ -1,4 +1,4 @@
-<?php # Script 12.1 login_page.inc.php
+<?php # Modified version of script 12.1 login_page.inc.php
 // This page prints any errors associated with loggin in and it creates the entire login page, including the form.
 
 // Include the header:
@@ -6,13 +6,15 @@ $page_title = 'Login';
 include('includes/header.html');
 
 // Print any error messages, if they exist:
-if (isset($errors) && !empty($errors)) {
+# 3. Add code to the handling of the $errors variable on the login page that uses a foreach loop if $errors is an array, or just prints the value of $errors otherwise.
+if (is_array($errors)) {
   echo '<h1>Error!</h1>
   <p class="error">The following error(s) occured:<br>';
   foreach ($errors as $msg) {
     echo "- $msg<br>\n";
   }
-  echo '</p><p>Please try again.</p>';
+} else {
+  echo $errors;
 }
 
 ?>

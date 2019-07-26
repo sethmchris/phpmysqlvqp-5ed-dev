@@ -29,9 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Assign $data to $errors for login_page.inc.php
     $errors = $data;
-    
   }
-  
+
   mysqli_close($dbc); // Close the database connection
 
 } // End of the main submit conditional
