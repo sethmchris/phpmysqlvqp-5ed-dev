@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $_SESSION['agent'] = sha1($_SERVER['HTTP_USER_AGENT']);
   
     // Redirect:
-    redirect_user('loggedin.php');
+    redirect_user('profile/index.php');
 
   } else { // Unsuccessful!
 
