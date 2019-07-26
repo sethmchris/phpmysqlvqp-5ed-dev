@@ -15,6 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if ($check) { // OK!
     setcookie('user_id', $data['user_id']);
     setcookie('first_name', $data['first_name']);
+    # 5b. Set the cookie to the $_POST value in login.php
     setcookie('darkmode', $_POST['darkmode'] );
   
     // Redirect the user to another page 
