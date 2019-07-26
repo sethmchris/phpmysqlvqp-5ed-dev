@@ -9,7 +9,7 @@
 <link href="css/sticky-footer-navbar.css" rel="stylesheet">
 </head>
 <?php # 5c. Add a conditional to header.html that changes the inline CSS (you can use the login/logout link conditional as a reference)
-if (isset($_COOKIE['darkmode'])) {
+if (isset($_COOKIE['dark_mode'])) {
 	echo '<body style="background:black; color: white;">';
 } else {
 	echo '<body>';

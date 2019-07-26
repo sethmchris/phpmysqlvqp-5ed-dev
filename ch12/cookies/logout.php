@@ -10,6 +10,7 @@ if (!isset($_COOKIE['user_id'])) {
 } else { // Delete the cookies:
   setcookie('user_id', '', time()-3600, '/', '', 0, 0);
   setcookie('first_name', '', time()-3600, '/', '', 0, 0);
+  setcookie('dark_mode', '', time()-3600, '/', '', 0, 0);
 }
 
 $page_title = 'Logged Out!';
