@@ -6,6 +6,7 @@ html {
 }
 body {
   /* Margin bottom by footer height */
+  margin-top: 51px; /* Clear the navigation menu */
   margin-bottom: 60px;
 }
 .footer {
