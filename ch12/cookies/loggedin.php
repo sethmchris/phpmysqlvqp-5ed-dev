@@ -1,7 +1,7 @@
 <?php # Modifired version of Script 12.4 - loggedin.php
 // The user is redirected here from login.php
 
-// If no session is present, redirect the user:
+// If no cookie is present, redirect the user:
 if (!isset($_COOKIE['user_id'])) {
 
   require('includes/login_functions.inc.php');

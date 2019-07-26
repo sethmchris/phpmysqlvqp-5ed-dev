@@ -21,7 +21,7 @@ if (isset($errors) && !empty($errors)) {
   <p>Email Address: <input  type="email" name="email"  size="20" maxlength="60"> </p>
   <p>Password: <input  type="password" name="pass"  size="20" maxlength="20"></p>
   <!-- 5a. Add the field to the form in login_page.inc.php -->
-  <p>Dark Mode: <input type="checkbox" name="darkmode" id="darkmode"></p>
+  <p>Dark Mode: <input type="checkbox" name="darkmode" id="dark_mode"></p>
   <p><input type="submit"  name="submit" value="Login"></p>
 </form>
 
