@@ -6,7 +6,7 @@
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   require('includes/login_functions.inc.php');
-  require('mysqli_connect.php');
+  require('../mysqli_connect.php');
 
   // Validate the form data
   list($check, $data) = check_login($dbc, $_POST['email'], $_POST['pass']);

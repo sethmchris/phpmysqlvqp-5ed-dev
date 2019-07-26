@@ -1,6 +1,6 @@
 <?php # Modified version of Script 12.6 - logout.php
 // This page lets the user logout.
-// session_name("Registration");
+
 session_start(); // Access the existing session.
 
 // If no cookie is present, redirect the user:
