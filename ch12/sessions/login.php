@@ -22,7 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Store the HTTP_USER_AGENT:
     $_SESSION['agent'] = sha1($_SERVER['HTTP_USER_AGENT']);
   
-    // Redirect:
+    # 4. Modify the redirect_user() function so that it can be used to redirect the user to a page within another directory.
+    # 4a. Redirect user to new direcory that contains a basic page
     redirect_user('profile/index.php');
 
   } else { // Unsuccessful!
