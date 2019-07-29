@@ -12,7 +12,6 @@ if (!isset($_SESSION['user_id'])) {
 
 } else { // Cancel the session
   $_SESSION = []; // Clear the variables
-  session_destroy();
   session_destroy(); // Destroy the session itself
   setcookie('PHPSESSID', '', time()-3600, '/', '', 0, 0); // Destroy the cookie
 }
