@@ -14,7 +14,8 @@ if (!isset($_SESSION['agent']) OR ($_SESSION['agent'] != md5($_SERVER['HTTP_USER
 }
   // Set the page title and include the HTML header
   $page_title = 'Profile';
-  include('includes/header.html'); // Include modified version of header.html 
+  # 4a. Include modified version of header.html so the navigation links work
+  include('includes/header.html');
 
   // Print a customized message:
   echo "<h1>Logged In!</h1>
