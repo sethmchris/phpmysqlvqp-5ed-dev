@@ -17,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		// Create the resource:
 		$fileinfo = finfo_open(FILEINFO_MIME_TYPE);	
 
+		# 5. Create a PHP script that reports the MIME type of any uploaded file
     echo '<p style="font-weight: bold; color: blue">You uploaded a file with the following filetype: ' . finfo_file($fileinfo, $_FILES['upload']['tmp_name']) . '</p> ';
 		// Close the resource:
 		finfo_close($fileinfo);
