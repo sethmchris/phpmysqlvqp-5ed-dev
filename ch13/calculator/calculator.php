@@ -5,7 +5,7 @@
 	<title>Widget Cost Calculator</title>
 </head>
 <body>
-<?php # Script 13.5 - calculator.php #2
+<?php # Modified version of Script 13.5 - calculator.php #2
 // This version of the script uses the Filter extension instead of typecasting.
 
 // Check if the form has been submitted:
