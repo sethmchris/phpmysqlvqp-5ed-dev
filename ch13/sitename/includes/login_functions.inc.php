@@ -40,6 +40,7 @@ function check_login($dbc, $email = '', $pass = '') {
 		$errors[] = 'You forgot to enter your email address.';
 	} else {
 		// $e = mysqli_real_escape_string($dbc, trim($email));
+		#7. Apply the Filter function to the login process in Chapter 12 to guarantee that the submitted email address meets the email address format, prior to using it in a query.
 		$filteredEmail = (isset($email)) ? filter_var($email, FILTER_VALIDATE_EMAIL) : NULL;
 		$e = mysqli_real_escape_string($dbc, trim($filteredEmail));
 	}
