@@ -1,4 +1,4 @@
-<?php # Script 10.3 - edit_user.php
+<?php # Modified version of Script 10.3 - edit_user.php
 // This page is for editing a user record.
 // This page is accessed through view_users.php.
 

@@ -1,4 +1,4 @@
-<?php # Script 13.7 - register.php #3
+<?php # Modified version of Script 13.7 - register.php #3
 // This script performs an INSERT query to add a record to the users table.
 
 $page_title = 'Register';

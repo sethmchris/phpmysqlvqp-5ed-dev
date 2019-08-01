@@ -1,4 +1,4 @@
-<?php # Script 10.2 - delete_user.php
+<?php # Modified version of Script 10.2 - delete_user.php
 // This page is for deleting a user record.
 // This page is accessed through view_users.php.
 
