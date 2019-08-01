@@ -11,25 +11,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 	$errors = []; // Initialize an error array.
 
+	# 6. Apply the strip_tags() function to a previous script in the book, such as the registration example, to prevent inappropriate code from being stored in the database.
+
 	// Check for a first name:
 	if (empty($_POST['first_name'])) {
 		$errors[] = 'You forgot to enter your first name.';
 	} else {
-		$fn = mysqli_real_escape_string($dbc, trim($_POST['first_name']));
+		# 6a. Apply the strip_tags() function to $fn
+		$fn = mysqli_real_escape_string($dbc, (strip_tags(trim($_POST['first_name']))));
 	}
 
 	// Check for a last name:
 	if (empty($_POST['last_name'])) {
 		$errors[] = 'You forgot to enter your last name.';
 	} else {
-		$ln = mysqli_real_escape_string($dbc, trim($_POST['last_name']));
+		# 6b. Apply the strip_tags() function to $ln
+		$ln = mysqli_real_escape_string($dbc, strip_tags(trim($_POST['last_name'])));
 	}
 
 	// Check for an email address:
 	if (empty($_POST['email'])) {
 		$errors[] = 'You forgot to enter your email address.';
 	} else {
-		$e = mysqli_real_escape_string($dbc, trim($_POST['email']));
+		# 6c. Apply the strip_tags() function to $e
+		$e = mysqli_real_escape_string($dbc, strip_tags(trim($_POST['email'])));
 	}
 
 	// Check for a password and match against the confirmed password:
@@ -37,7 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		if ($_POST['pass1'] != $_POST['pass2']) {
 			$errors[] = 'Your password did not match the confirmed password.';
 		} else {
-			$p = password_hash(trim($_POST['pass1']), PASSWORD_DEFAULT);
+			# 6d. Apply the strip_tags() function to $p
+			$p = password_hash(strip_tags(trim($_POST['pass1'])), PASSWORD_DEFAULT);
 		}
 	} else {
 		$errors[] = 'You forgot to enter your password.';
