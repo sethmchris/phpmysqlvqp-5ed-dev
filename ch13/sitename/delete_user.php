@@ -2,25 +2,23 @@
 // This page is for deleting a user record.
 // This page is accessed through view_users.php.
 
-# 1a. Change the delete_user.php and edit_user.php pages so that they both display the user being affected in the browser window's title bar
-require('../mysqli_connect.php');
-$q = mysqli_fetch_assoc(mysqli_query($dbc, "SELECT CONCAT(last_name, ', ', first_name) as name FROM users WHERE user_id=" . $_GET['id']));
-$name = $q['name'];
-
-$page_title = 'Delete User: ' . $name;
+$page_title = 'Delete a User';
 include('includes/header.html');
 echo '<h1>Delete a User</h1>';
 
 // Check for a valid user ID, through GET or POST:
 if ( (isset($_GET['id'])) && (is_numeric($_GET['id'])) ) { // From view_users.php
-	$id = $_GET['id'];
+	$id = filter_var($_GET['id'], FILTER_VALIDATE_INT);
 } elseif ( (isset($_POST['id'])) && (is_numeric($_POST['id'])) ) { // Form submission.
-	$id = $_POST['id'];
+	$id = filter_var($_POST['id'], FILTER_VALIDATE_INT);
 } else { // No valid ID, kill the script.
+	$id = NULL;
 	echo '<p class="error">This page has been accessed in error.</p>';
 	include('includes/footer.html');
 	exit();
 }
+
+require('../mysqli_connect.php');
 
 // Check if the form has been submitted:
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -56,8 +54,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$row = mysqli_fetch_array($r, MYSQLI_NUM);
 
 		// Display the record being deleted:
-		
-    // $page_title = 'Delete a User - ' . $name;
 		echo "<h3>Name: $row[0]</h3>
 		Are you sure you want to delete this user?";
 
